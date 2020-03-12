@@ -7,76 +7,20 @@ import (
 	"strings"
 )
 
-type tokenBody struct {
-	userID     int32  `json:"id"`
-	username   string `json:"username"`
-	clientName string `json:"clientName"`
-	client     string `json:"client"`
-	timezone   string `json:"timezone"`
-	currency   string `json:"currency"`
-	roleID     int32  `json:"role"`
-	issueDate  int64  `json:"issueDate"`
-}
-
-func (t *tokenBody) GetUserID() int32 {
-	if t == nil {
-		return 0
-	}
-	return t.userID
-}
-
-func (t *tokenBody) GetUsername() string {
-	if t == nil {
-		return ""
-	}
-	return t.username
-}
-
-func (t *tokenBody) GetClientName() string {
-	if t == nil {
-		return ""
-	}
-	return t.clientName
-}
-
-func (t *tokenBody) GetClient() string {
-	if t == nil {
-		return ""
-	}
-	return t.client
-}
-
-func (t *tokenBody) GetTimeZone() string {
-	if t == nil {
-		return ""
-	}
-	return t.timezone
-}
-
-func (t *tokenBody) GetCurrency() string {
-	if t == nil {
-		return ""
-	}
-	return t.currency
-}
-
-func (t *tokenBody) GetRoleID() int32 {
-	if t == nil {
-		return 0
-	}
-	return t.roleID
-}
-
-func (t *tokenBody) GetIssueDate() int64 {
-	if t == nil {
-		return 0
-	}
-	return t.issueDate
+type Token struct {
+	UserID     int32  `json:"id"`
+	Username   string `json:"username"`
+	ClientName string `json:"clientName"`
+	Client     string `json:"client"`
+	Timezone   string `json:"timezone"`
+	Currency   string `json:"currency"`
+	RoleID     int32  `json:"role"`
+	IssueDate  int64  `json:"issueDate"`
 }
 
 //accepts decoded token string and returns token object
-func createToken(token string) (*tokenBody, error) {
-	var t tokenBody
+func createToken(token string) (*Token, error) {
+	var t Token
 
 	err := json.Unmarshal([]byte(token), &t)
 	if err != nil {
@@ -101,7 +45,7 @@ func base64Decode(src string) (string, error) {
 }
 
 //accepts jwt stored in cookie and returns token object
-func CreateTokenFromEncodedJWT(encodedJWT string) (*tokenBody, error) {
+func CreateTokenFromEncodedJWT(encodedJWT string) (*Token, error) {
 	encodedTokenArray := strings.Split(encodedJWT, ".")
 	if len(encodedTokenArray) != 3 {
 		return nil, errors.New("invalid token")
@@ -110,7 +54,7 @@ func CreateTokenFromEncodedJWT(encodedJWT string) (*tokenBody, error) {
 }
 
 //accepts encoded token string and returns token object
-func CreateTokenFromEncodedString(encodedToken string) (*tokenBody, error) {
+func CreateTokenFromEncodedString(encodedToken string) (*Token, error) {
 	decodedToken, err := base64Decode(encodedToken)
 	if err != nil {
 		return nil, err
