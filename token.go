@@ -18,7 +18,7 @@ type tokenBody struct {
 	issueDate  int64  `json:"issueDate"`
 }
 
-func (t *tokenBody) GetID() int32 {
+func (t *tokenBody) GetUserID() int32 {
 	if t == nil {
 		return 0
 	}
