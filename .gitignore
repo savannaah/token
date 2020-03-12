@@ -1,0 +1,8 @@
+# OS X's Finder creates these for state about opened windows/etc.
+**/.DS_Store
+
+# Visual Studio Code
+/.vscode/
+
+# IntelliJ
+.idea
