@@ -4,7 +4,9 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"log"
 	"strings"
+	"time"
 )
 
 type Token struct {
@@ -16,6 +18,36 @@ type Token struct {
 	Currency   string `json:"currency"`
 	RoleID     int32  `json:"role"`
 	IssueDate  int64  `json:"issueDate"`
+}
+
+func (t *Token) Validate() bool {
+	if t.UserID != 0 &&
+		len(t.Username) != 0 &&
+		len(t.ClientName) != 0 &&
+		len(t.Currency) != 0 &&
+		len(t.Client) != 0 &&
+		len(t.Timezone) != 0 &&
+		t.RoleID != 0 &&
+		t.IssueDate > 0 {
+		return true
+	}
+	return false
+}
+
+//create json from instance
+func (t *Token) Stringify() (string, error) {
+	tj, err := json.Marshal(t)
+	if err != nil {
+		log.Println(err)
+		return "", errors.New("invalid")
+	}
+
+	return string(tj), nil
+}
+
+//update issueDate
+func (t *Token) UpdateToken(minute int) {
+	t.IssueDate = time.Now().Add(time.Minute * time.Duration(minute)).Unix()
 }
 
 //accepts decoded token string and returns token object
