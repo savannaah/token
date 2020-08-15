@@ -6,7 +6,6 @@ import (
 	"errors"
 	"log"
 	"strings"
-	"time"
 )
 
 type Token struct {
@@ -46,8 +45,8 @@ func (t *Token) Stringify() (string, error) {
 }
 
 //update issueDate
-func (t *Token) UpdateToken(minute int) {
-	t.IssueDate = time.Now().Add(time.Minute * time.Duration(minute)).Unix()
+func (t *Token) UpdateToken(newTimeStamp int64) {
+	t.IssueDate = newTimeStamp
 }
 
 //accepts decoded token string and returns token object
