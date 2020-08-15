@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
-	"log"
 	"strings"
 )
 
@@ -37,8 +36,7 @@ func (t *Token) Validate() bool {
 func (t *Token) Stringify() (string, error) {
 	tj, err := json.Marshal(t)
 	if err != nil {
-		log.Println(err)
-		return "", errors.New("invalid")
+		return "", err
 	}
 
 	return string(tj), nil
