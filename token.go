@@ -25,8 +25,7 @@ func (t *Token) Validate() bool {
 		len(t.Currency) != 0 &&
 		len(t.Client) != 0 &&
 		len(t.Timezone) != 0 &&
-		t.RoleID != 0 &&
-		t.IssueDate > 0 {
+		t.RoleID != 0 {
 		return true
 	}
 	return false
