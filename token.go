@@ -11,7 +11,7 @@ type Token struct {
 	UserID     int32  `json:"id"`
 	Username   string `json:"username"`
 	ClientName string `json:"clientName"`
-	Client     string `json:"client"`
+	Subdomain     string `json:"subdomain"`
 	Timezone   string `json:"timezone"`
 	Currency   string `json:"currency"`
 	RoleID     int32  `json:"role"`
@@ -23,7 +23,7 @@ func (t *Token) Validate() bool {
 		len(t.Username) != 0 &&
 		len(t.ClientName) != 0 &&
 		len(t.Currency) != 0 &&
-		len(t.Client) != 0 &&
+		len(t.Subdomain) != 0 &&
 		len(t.Timezone) != 0 &&
 		t.RoleID != 0 {
 		return true
