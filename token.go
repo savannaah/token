@@ -3,7 +3,7 @@ package token
 import (
 	"encoding/base64"
 	"encoding/json"
-	"errors"
+	"github.com/savannaah/sxerror"
 	"strings"
 )
 
@@ -11,7 +11,7 @@ type Token struct {
 	UserID     int32  `json:"id"`
 	Username   string `json:"username"`
 	ClientName string `json:"clientName"`
-	Subdomain     string `json:"subdomain"`
+	Subdomain  string `json:"subdomain"`
 	Timezone   string `json:"timezone"`
 	Currency   string `json:"currency"`
 	RoleID     int32  `json:"role"`
@@ -35,7 +35,7 @@ func (t *Token) Validate() bool {
 func (t *Token) Stringify() (string, error) {
 	tj, err := json.Marshal(t)
 	if err != nil {
-		return "", err
+		return "", sxerror.New("SXSAAA001003", err.Error())
 	}
 
 	return string(tj), nil
@@ -52,7 +52,7 @@ func createToken(token string) (*Token, error) {
 
 	err := json.Unmarshal([]byte(token), &t)
 	if err != nil {
-		return &t, err
+		return &t, sxerror.New("SXSAAA001004", err.Error())
 	}
 
 	return &t, nil
@@ -61,12 +61,12 @@ func createToken(token string) (*Token, error) {
 // Base64Decode takes in a base 64 encoded string and returns the //actual string or an error of it fails to decode the string
 func base64Decode(src string) (string, error) {
 	if len(src) == 0 {
-		return "", errors.New("cannot decode empty string")
+		return "", sxerror.New("SXBAAA001002", "cannot decode an empty string")
 	}
 
 	data, err := base64.StdEncoding.DecodeString(src)
 	if err != nil {
-		return "", err
+		return "", sxerror.New("SXSAAA001002", err.Error())
 	}
 
 	return string(data), nil
@@ -76,7 +76,7 @@ func base64Decode(src string) (string, error) {
 func CreateTokenFromEncodedJWT(encodedJWT string) (*Token, error) {
 	encodedTokenArray := strings.Split(encodedJWT, ".")
 	if len(encodedTokenArray) != 3 {
-		return nil, errors.New("invalid token")
+		return nil, sxerror.New("SXBAAA001002", "token is not genuine")
 	}
 	return CreateTokenFromEncodedString(encodedTokenArray[1])
 }
