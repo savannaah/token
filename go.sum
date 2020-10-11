@@ -2,3 +2,5 @@ github.com/savannaah/sxerror v0.0.0-20201006101633-a5d2838f523d h1:TLP36FmJ3B7tt
 github.com/savannaah/sxerror v0.0.0-20201006101633-a5d2838f523d/go.mod h1:5D9IjbN0KMkz+18aaUaJ+MquSVoRG09yDP7Jp63D7Kk=
 github.com/savannaah/sxerror v0.0.0-20201011001135-2e176b21252b h1:H6c6pQzwD9b0RHNfj9sYNkQCHvZ8cdYlFF7KDI2efIk=
 github.com/savannaah/sxerror v0.0.0-20201011001135-2e176b21252b/go.mod h1:k9SOuMCcg1sLfzGlqMHtF0tJXQ1tpe3KrWFT5qZu0jk=
+github.com/savannaah/sxerror v0.0.0-20201011010113-2db3f0bd6048 h1:m1nveLNLe/nc0sKhHFIfyzRDZPKcdiB4aqZGbFdbKIc=
+github.com/savannaah/sxerror v0.0.0-20201011010113-2db3f0bd6048/go.mod h1:k9SOuMCcg1sLfzGlqMHtF0tJXQ1tpe3KrWFT5qZu0jk=
